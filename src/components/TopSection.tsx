@@ -6,7 +6,7 @@ const TopSection: React.FC = () => {
     <div className="fixed top-0 left-0 w-full bg-black bg-opacity-50 text-white p-4 z-50 backdrop-blur-xl">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          <img src="/logo192.png" alt="Logo" className="w-8 h-8" />
+          <img src="/FloodSight.png" alt="Logo" className="w-8 h-8" />
           <span className="ml-2 text-xl font-bold">FloodSight</span>
         </div>
         <nav className="absolute left-1/2 transform -translate-x-1/2 bg-[#0E0E0E] text-[#878787] rounded px-4 py-2">
