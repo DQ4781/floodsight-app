@@ -1,9 +1,10 @@
 import React from 'react';
 import Card from './Card';
+import { format, parseISO, differenceInDays } from 'date-fns';
 
 interface PredictionCardProps {
   discharge: number;
-  day: number;
+  date: string;
 }
 
 const getRiskLevel = (discharge: number): string => {
@@ -20,9 +21,18 @@ const getColor = (discharge: number): string => {
   return 'bg-red-500';
 };
 
-const PredictionCard: React.FC<PredictionCardProps> = ({ discharge, day }) => {
+const getRelativeDate = (date: string): string => {
+  const parsedDate = parseISO(date);
+  const today = new Date();
+  const daysDifference = differenceInDays(parsedDate, today);
+
+  if (daysDifference === 1) return `Tomorrow (${format(parsedDate, 'MMM d, yyyy')})`;
+  return `In ${daysDifference} days (${format(parsedDate, 'MMM d, yyyy')})`;
+};
+
+const PredictionCard: React.FC<PredictionCardProps> = ({ discharge, date }) => {
   return (
-    <Card title={`Day ${day}`}>
+    <Card title={`Prediction for ${getRelativeDate(date)}`}>
       <div className={`p-4 rounded my-2 ${getColor(discharge)}`}>
         <p>Discharge: {discharge.toFixed(2)} m³/sec</p>
         <p>Risk Level: {getRiskLevel(discharge)}</p>
